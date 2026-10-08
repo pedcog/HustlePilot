@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SideHustle Launchpad — Turn Your Skills Into Income</title>
+<meta name="description" content="Find a side hustle, build your offer and get a 30-day launch plan.">
+<style>
+:root{--bg:#f5f7fb;--ink:#121522;--muted:#656b7d;--card:#fff;--line:#e5e7ee;--accent:#111827;--soft:#eef1f7}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--ink)}
+.wrap{max-width:1050px;margin:auto;padding:22px}.nav{display:flex;justify-content:space-between;align-items:center;padding:10px 0}.logo{font-weight:900}.badge{font-size:12px;background:var(--soft);padding:7px 10px;border-radius:999px}
+.hero{text-align:center;padding:55px 10px 35px}.hero h1{font-size:clamp(40px,7vw,70px);line-height:.98;margin:12px auto;max-width:850px;letter-spacing:-2px}.hero p{font-size:19px;color:var(--muted);max-width:700px;margin:20px auto}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:25px;margin:18px 0;box-shadow:0 10px 35px rgba(20,30,55,.05)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:15px}@media(max-width:720px){.grid{grid-template-columns:1fr}}
+label{font-weight:800;font-size:14px;display:block;margin:3px 0 7px}input,select{width:100%;padding:14px;border:1px solid #d8dbe5;border-radius:12px;font-size:16px;background:#fff}
+button{border:0;border-radius:12px;padding:14px 18px;font-weight:850;font-size:16px;cursor:pointer;background:#111827;color:#fff}button.alt{background:var(--soft);color:var(--ink)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.hidden{display:none}.muted{color:var(--muted)}
+.result h2{margin-top:0}.metric{border:1px solid var(--line);border-radius:16px;padding:17px}.metric b{font-size:25px}
+.steps{counter-reset:s}.step{display:flex;gap:13px;margin:16px 0}.step:before{counter-increment:s;content:counter(s);min-width:32px;height:32px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:900}
+.pro{background:#111827;color:white;border-radius:18px;padding:24px}.pro p{color:#d8dbe4}.pro button{background:white;color:#111827}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#111827;color:white;padding:12px 16px;border-radius:12px;display:none}
+footer{text-align:center;color:#777d8d;padding:35px;font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav"><div class="logo">SideHustle Launchpad</div><div class="badge">MVP • FREE TO START</div></nav>
+
+<section class="hero">
+<div class="badge">NO EXPERIENCE REQUIRED</div>
+<h1>Turn what you know into an income stream.</h1>
+<p>Tell us your skills, time and target. Get a practical side-hustle concept, offer, pricing and 30-day launch roadmap.</p>
+</section>
+
+<section class="card">
+<h2>Build my personalised plan</h2>
+<div class="grid">
+<div><label>What are you good at?</label><input id="skill" placeholder="Sales, beauty, admin, fitness, cooking..."></div>
+<div><label>Who would you rather work with?</label><select id="customer"><option>Local businesses</option><option>Individuals</option><option>Online businesses</option><option>I don't mind</option></select></div>
+<div><label>Time available each week</label><select id="hours"><option value="5">2–5 hours</option><option value="10">5–10 hours</option><option value="20">10–20 hours</option><option value="30">20+ hours</option></select></div>
+<div><label>Monthly income target</label><select id="target"><option value="250">£250</option><option value="500">£500</option><option value="1000">£1,000</option><option value="2000">£2,000+</option></select></div>
+<div><label>Starting budget</label><select id="budget"><option>£0</option><option>Up to £50</option><option>Up to £100</option><option>£100+</option></select></div>
+<div><label>Your preferred model</label><select id="model"><option>Service business</option><option>Digital product</option><option>Either</option></select></div>
+</div>
+<div class="actions"><button onclick="buildPlan()">Build my plan</button><button class="alt" onclick="fillExample()">Use example</button></div>
+<p class="muted" style="font-size:12px">Planning tool only. Income is not guaranteed.</p>
+</section>
+
+<section id="result" class="card hidden">
+<h2 id="headline"></h2><p id="intro" class="muted"></p>
+<div class="grid">
+<div class="metric"><span class="muted">Suggested offer</span><br><b id="offer"></b></div>
+<div class="metric"><span class="muted">Starter price</span><br><b id="price"></b></div>
+<div class="metric"><span class="muted">Sales needed</span><br><b id="sales"></b></div>
+<div class="metric"><span class="muted">Customer route</span><br><b id="route"></b></div>
+</div>
+<h3>30-day roadmap</h3><div id="steps" class="steps"></div>
+<div class="pro">
+<h2>🚀 Launch Pro</h2>
+<p>Turn the idea into a real business with a sales script, 30 social posts, proposal templates, customer tracker, pricing calculator and a personalised weekly action plan.</p>
+<button onclick="upgrade()">Join Pro — £9.99/month</button>
+<p style="font-size:12px">Demo checkout button — connect your payment processor before charging customers.</p>
+</div>
+</section>
+
+<section class="card">
+<h2>Built-in revenue model</h2>
+<div class="grid">
+<div><h3>Freemium</h3><p class="muted">Free plan creates the habit; Pro unlocks the useful execution tools.</p></div>
+<div><h3>Subscriptions</h3><p class="muted">£9.99/month creates recurring revenue instead of one-off sales.</p></div>
+<div><h3>Affiliate income</h3><p class="muted">Recommend genuinely useful business software and earn commissions where programmes are available.</p></div>
+<div><h3>Lead generation</h3><p class="muted">Later, sell qualified leads or your own consulting/templates/courses.</p></div>
+</div>
+</section>
+
+<section class="card">
+<h2>Launch checklist</h2>
+<div class="steps">
+<div class="step">Put the app on a free static host and use a simple brand/domain.</div>
+<div class="step">Create short videos showing the calculator producing different side-hustle plans.</div>
+<div class="step">Give the first users Pro access free in exchange for feedback/testimonials.</div>
+<div class="step">Only add paid checkout after the free version has real usage.</div>
+<div class="step">Track visitors → plans generated → Pro clicks → paid conversions.</div>
+</div>
+</section>
+<footer>SideHustle Launchpad © 2026 • Prototype ready for deployment</footer>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+function money(n){return new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP',maximumFractionDigits:0}).format(n)}
+function buildPlan(){
+ const skill=document.getElementById('skill').value.trim()||'your skill';
+ const customer=document.getElementById('customer').value, hours=+document.getElementById('hours').value, target=+document.getElementById('target').value;
+ const price=target>=2000?250:target>=1000?200:100;
+ const sales=Math.ceil(target/price);
+ let offer=`${skill} service for ${customer.toLowerCase()}`;
+ let route=customer==='Local businesses'?'Direct outreach + local networking':customer==='Individuals'?'Local groups + referrals':'LinkedIn + direct outreach';
+ document.getElementById('headline').textContent=`Your best starting angle: ${offer}`;
+ document.getElementById('intro').textContent=`Start with one customer, one problem and one outcome. Your first objective is proof of demand, not a perfect brand.`;
+ document.getElementById('offer').textContent=offer;
+ document.getElementById('price').textContent=money(price);
+ document.getElementById('sales').textContent=`${sales} sale${sales===1?'':'s'} / month`;
+ document.getElementById('route').textContent=route;
+ const arr=[
+ `Days 1–3: Define the exact customer and write a one-sentence promise: “I help [customer] get [result] without [pain].”`,
+ `Days 4–7: Create a simple sample, before/after example or mini-audit that proves your ability.`,
+ `Week 2: Contact 10 prospects a day. Ask questions first and offer a small, clear first step.`,
+ `Week 3: Deliver your first work fast. Ask for feedback and a testimonial.`,
+ `Week 4: Repeat what worked, remove what didn't, and raise your price once demand supports it.`
+ ];
+ document.getElementById('steps').innerHTML=arr.map(x=>`<div class="step">${x}</div>`).join('');
+ document.getElementById('result').classList.remove('hidden');
+ document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+function fillExample(){document.getElementById('skill').value='sales';document.getElementById('customer').value='Local businesses';document.getElementById('hours').value='10';document.getElementById('target').value='1000';buildPlan()}
+function upgrade(){showToast('Connect Stripe or another payment processor here before launch.')}
+function showToast(t){const x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',3000)}
+</script>
+</body>
+</html>
